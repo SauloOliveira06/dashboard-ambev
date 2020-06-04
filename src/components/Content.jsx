@@ -12,6 +12,7 @@ export default function Content() {
           <div className="row mb-2">
             <div className="col-sm-6">
               <h1 className="m-0 text-dark">Dashboard MIP</h1>
+              <h5>Mês:</h5>
             </div>
             {/* /.col */}
             {/* <div className="col-sm-6">
@@ -40,11 +41,8 @@ export default function Content() {
                   <i className="fas fa-money-check-alt" />
                 </span>
                 <div className="info-box-content">
-                  <span className="info-box-text">Total</span>
-                  <span className="info-box-number">
-                    10
-                    <small>%</small>
-                  </span>
+                  <span className="info-box-text">Custo Total</span>
+                  <span className="info-box-number">R$ 9.999,00</span>
                 </div>
                 {/* /.info-box-content */}
               </div>
@@ -57,8 +55,8 @@ export default function Content() {
                   <i className="fas fa-funnel-dollar" />
                 </span>
                 <div className="info-box-content">
-                  <span className="info-box-text">Total</span>
-                  <span className="info-box-number">9.999,00</span>
+                  <span className="info-box-text">Efeito Preço</span>
+                  <span className="info-box-number">R$/MIL 9.999,00</span>
                 </div>
                 {/* /.info-box-content */}
               </div>
@@ -73,8 +71,8 @@ export default function Content() {
                   <i className="fas fa-money-bill-alt"></i>
                 </span>
                 <div className="info-box-content">
-                  <span className="info-box-text">Total</span>
-                  <span className="info-box-number">99.99</span>
+                  <span className="info-box-text">Efeito Performance</span>
+                  <span className="info-box-number">R$/MIL 99.99</span>
                 </div>
                 {/* /.info-box-content */}
               </div>
@@ -87,7 +85,7 @@ export default function Content() {
                   <i className="fas fa-search-dollar" />
                 </span>
                 <div className="info-box-content">
-                  <span className="info-box-text">Total</span>
+                  <span className="info-box-text">Volume Total</span>
                   <span className="info-box-number">2.000,00</span>
                 </div>
                 {/* /.info-box-content */}
@@ -244,10 +242,10 @@ export default function Content() {
                     <div className="col-sm-3 col-6">
                       <div className="description-block border-right">
                         <span className="description-percentage text-danger">
-                          <i className="fas fa-caret-down" /> 4%
+                          <i className="fas fa-caret-down" /> 10%
                         </span>
-                        <h5 className="description-header">R$10,390.90</h5>
-                        <span className="description-text">TOTAL CUSTO</span>
+                        <h5 className="description-header">10.390,90</h5>
+                        <span className="description-text">TOTAL QUANTIDADE</span>
                       </div>
                       {/* /.description-block */}
                     </div>
@@ -257,7 +255,7 @@ export default function Content() {
                         <span className="description-percentage text-warning">
                           <i className="fas fa-caret-left" /> 20%
                         </span>
-                        <h5 className="description-header">R$24.813.53</h5>
+                        <h5 className="description-header">24.813.53</h5>
                         <span className="description-text">TOTAL VOLUME</span>
                       </div>
                       {/* /.description-block */}
@@ -269,20 +267,15 @@ export default function Content() {
                           <i className="fas fa-caret-up" /> 18%
                         </span>
                         <h5 className="description-header">1200</h5>
-                        <span className="description-text">TOTAL EXEMPLO</span>
+                        <span className="description-text">TOTAL HECTOLITRO</span>
                       </div>
-      
                     </div>
                   </div>
-      
                 </div>
-      
               </div>
-      
             </div>
-      
           </div>
-      
+
           <div className="row">
             <div className="col-md-6">
               <Inline />
@@ -291,9 +284,7 @@ export default function Content() {
               <BarChart />
             </div>
           </div>
-      
         </div>
-      
       </section>
       <TabelaMip />
     </div>

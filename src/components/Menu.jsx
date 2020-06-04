@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Menu() {
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
       {/* Brand Logo */}
-      <a href="index3.html" className="brand-link">
+      <Link href="/" className="brand-link">
         <img
           src="dist/img/AdminLTELogo.png"
           alt="AdminLTE Logo"
@@ -12,16 +13,13 @@ export default function Menu() {
           style={{ opacity: ".8" }}
         />
         <span className="brand-text font-weight-light">Ambev</span>
-      </a>
+      </Link>
       {/* Sidebar */}
       <div className="sidebar">
         {/* Sidebar user panel (optional) */}
         <div className="user-panel mt-3 pb-3 mb-3 d-flex">
-          
           <div className="info">
-            <a href="#" className="d-block">
-              MENU
-            </a>
+            <Link href="">MENU</Link>
           </div>
         </div>
         {/* Sidebar Menu */}
@@ -32,37 +30,35 @@ export default function Menu() {
             role="menu"
             data-accordion="false"
           >
-      
             <li className="nav-item has-treeview">
-              <a href="#" className="nav-link">
+              <Link href="/#/" className="nav-link">
                 <i className="nav-icon fas fa-tachometer-alt" />
                 <p>
                   Dashboards
                   <i className="right fas fa-angle-left" />
                 </p>
-              </a>
+              </Link>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <a href="./index.html" className="nav-link">
+                  <Link href="/#/" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Dashboard MIP</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="./index2.html" className="nav-link">
+                  <Link href="/#/" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Dashboard MIP 2</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="./index3.html" className="nav-link">
+                  <Link href="/#/" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Dashboard MIP 3</p>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
-          
           </ul>
 
           <ul
@@ -71,21 +67,20 @@ export default function Menu() {
             role="menu"
             data-accordion="false"
           >
-            
             <li className="nav-item has-treeview ">
-              <a href="#" className="nav-link">
+              <Link href="#" className="nav-link">
                 <i className="nav-icon fas fa-tachometer-alt" />
                 <p>
                   Carteira 1
                   <i className="right fas fa-angle-left" />
                 </p>
-              </a>
+              </Link>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <a href="#" className="nav-link">
+                  <Link href="#" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Exemplo</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a href="./index2.html#" className="nav-link">
@@ -94,19 +89,16 @@ export default function Menu() {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a href="#" className="nav-link">
+                  <Link href="/#/" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Exemplo</p>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
-          
           </ul>
         </nav>
-        
       </div>
-      
     </aside>
   );
 }
