@@ -9,7 +9,7 @@ class ContentBuscaMip extends Component{
   
   async componentDidMount(){
     const response = await api.get('')
-    console.log("mip")
+    
     this.setState({mip: response.data});
   }
 
