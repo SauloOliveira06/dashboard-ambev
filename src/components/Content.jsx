@@ -6,17 +6,23 @@ import api from '../api'
 
 class Content extends Component {
   state = {
-    custoTotal: [],
+    mip: {},
+    volumeSap: [],
+    realSap: []
   };
 
   async componentDidMount() {
     const response = await api.get("");
-
-    this.setState({ custoTotal: response.data });
+    const data = response.data[0];
+    const { volumeSap, realSap, ...mip } = data;
+    
+    this.setState({mip, volumeSap, realSap});
   }
   render() {
-    const { custoTotal } = this.state;
 
+    const { mip } = this.state;
+    console.log(mip);
+    
     return (
       <div>
         <div className="content-wrapper">
@@ -56,9 +62,9 @@ class Content extends Component {
                     </span>
                     <div className="info-box-content">
                     <span className="info-box-text">Custo Total</span>
-                      {custoTotal.map(custoTotalMip => (
-                        <span className="info-box-number" key={custoTotalMip.custoTotal.id}>{custoTotalMip.custoTotal.total}</span>
-                      ))}
+                      {/* {custoTotal[0].realSap.map(sheet => (
+                        <span className="info-box-number" key={sheet.id}>{sheet.total}</span>
+                      ))} */}
                     </div>
                     {/* /.info-box-content */}
                   </div>
