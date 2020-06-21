@@ -11,10 +11,15 @@ import moneyFormatter from '../utils/moneyFormat';
 
 export default function Content() {
   const [mip, setMip] = useState({});
+  const [mipExists, setMipExists] = useState(false);
 
   async function getMip() {
     const response = await api.get('/mip');
-    const data = response.data[0];
+    const { data } = response;
+
+    if (data !== undefined) {
+      setMipExists(true);
+    }
 
     setMip(data);
   }
@@ -23,12 +28,11 @@ export default function Content() {
     getMip();
   }, []);
 
-  const {
-    custoTotal,
-    efeitoPerformaceTotal,
-    efeitoPrecoTotal,
-    dataUploadedMip,
-  } = mip;
+  const custoTotal = mip !== undefined ? mip.custoTotal : undefined;
+  const efeitoPerformaceTotal =
+    mip !== undefined ? mip.efeitoPerformaceTotal : undefined;
+  const efeitoPrecoTotal = mip !== undefined ? mip.efeitoPrecoTotal : undefined;
+  const dataUploadedMip = mip !== undefined ? mip.dataUploadedMip : undefined;
 
   const totalDoCusto =
     custoTotal !== undefined ? moneyFormatter(custoTotal.total) : '0,00';
@@ -50,12 +54,12 @@ export default function Content() {
             <div className="row mb-2">
               <div className="col-sm-6">
                 <h1 className="m-0 text-dark">Dashboard MIP</h1>
-                <h5>
+                <span>
                   Mês:{' '}
                   {dataUploadedMip !== undefined
                     ? dateFormatter(dataUploadedMip)
                     : ''}
-                </h5>
+                </span>
               </div>
             </div>
           </div>
@@ -321,7 +325,7 @@ export default function Content() {
             </div>
           </div>
         </section>
-        <TabelaMip />
+        <TabelaMip mip={mip} />
       </div>
     </div>
   );
