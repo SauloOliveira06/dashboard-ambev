@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export default function TabelaMip() {
+export default function TabelaMip({ mip }) {
   return (
     <section className="content">
       <div className="container-fluid">
@@ -9,7 +9,7 @@ export default function TabelaMip() {
             <div className="card">
               <div className="card-header">
                 <h3 className="card-title">
-                  Tabela de Produtos MIP - Base Real (Exemplo)
+                  Tabela de Produtos MIP - Base Real
                 </h3>
               </div>
               {/* /.card-header */}
@@ -238,7 +238,7 @@ export default function TabelaMip() {
                       <td>522.1</td>
                       <td>A</td>
                     </tr>
-                    
+
                     <tr>
                       <td>Presto</td>
                       <td>Nintendo DS browser</td>
@@ -358,15 +358,10 @@ export default function TabelaMip() {
                   </tfoot> */}
                 </table>
               </div>
-         
             </div>
-      
           </div>
-   
         </div>
- 
       </div>
- 
     </section>
   );
 }
