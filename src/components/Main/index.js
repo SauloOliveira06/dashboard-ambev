@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import BarChart from './Charts/BarChart';
-import Inline from './Charts/Inline';
-import TabelaMip from './Tables/mip';
+import BarChart from '../Charts/BarChart';
+import Inline from '../Charts/Inline';
+import TabelaMip from '../Tables/mip';
 
-import api from '../api';
-import dateFormatter from '../utils/dateFormat';
+import api from '../../api';
+import dateFormatter from '../../utils/dateFormat';
 
-// import { Container } from './styles';
+import { NotContent } from './styles';
 
-import Box from './Box';
-import GraficoAnalise from './graficoAnalise';
+import Box from '../Box';
+import GraficoAnalise from '../graficoAnalise';
+import Loading from '../Loading';
 
 export default function Content() {
   const [mip, setMip] = useState({});
-  const [mipExists, setMipExists] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function getMip() {
+    setLoading(true);
+
     const response = await api.get('/mip');
     const { data } = response;
 
-    if (data) {
-      setMipExists(true);
-    }
+    setLoading(false);
 
     setMip(data);
   }
@@ -34,7 +35,8 @@ export default function Content() {
     <>
       <div>
         <div className="content-wrapper">
-          {mip ? (
+          {loading && <Loading loading={loading} />}
+          {!loading && mip ? (
             <>
               <div className="content-header">
                 <div className="container-fluid">
@@ -69,9 +71,7 @@ export default function Content() {
               <TabelaMip mip={mip} />
             </>
           ) : (
-            <div>
-              <span>Nenhum</span>
-            </div>
+            <NotContent />
           )}
         </div>
       </div>
