@@ -1,16 +1,23 @@
 import React from 'react';
+import { Router } from 'react-router-dom';
+
+import GlobalStyle from './styles/global';
+
 import Header from './components/Header';
 import Menu from './components/Menu';
-import Main from './components/Main';
 import Footer from './components/Footer';
+import Routes from './routes';
+
+import history from './services/history';
 
 export default function App() {
   return (
-    <div className="wrapper">
+    <Router history={history}>
       <Header />
+      <GlobalStyle />
       <Menu />
-      <Main />
+      <Routes />
       <Footer />
-    </div>
+    </Router>
   );
 }
