@@ -1,26 +1,25 @@
-import React, { Component } from 'react'
-import api from './../../api'
+import React, { Component } from 'react';
+import api from '../../services/api';
 
-class ContentBuscaMip extends Component{
-  
+class ContentBuscaMip extends Component {
   state = {
     mip: [],
-  }
-  
-  async componentDidMount(){
-    const response = await api.get('')
-    
-    this.setState({mip: response.data});
+  };
+
+  async componentDidMount() {
+    const response = await api.get('');
+
+    this.setState({ mip: response.data });
   }
 
-  render(){
+  render() {
     const { mip } = this.state;
-    return(
+    return (
       <div>
         <h1>Listar Produtos MIP</h1>
         {console.log(mip)}
       </div>
-    )
+    );
   }
 }
 

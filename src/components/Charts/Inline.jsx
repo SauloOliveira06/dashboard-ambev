@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Inline() {
   return (
@@ -10,7 +10,7 @@ export default function Inline() {
       </div>
       <div className="card-body">
         <div className="d-flex">
-        <p className="d-flex flex-column">
+          <p className="d-flex flex-column">
             <span className="text-bold text-lg">R$ 99.999,00</span>
             <span>Análise</span>
           </p>
