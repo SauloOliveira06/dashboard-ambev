@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Menu() {
   return (
@@ -10,7 +10,7 @@ export default function Menu() {
           src="dist/img/AdminLTELogo.png"
           alt="AdminLTE"
           className="brand-image img-circle elevation-3"
-          style={{ opacity: ".8" }}
+          style={{ opacity: '.8' }}
         />
         <span className="brand-text font-weight-light">Ambev</span>
       </Link>
@@ -71,7 +71,7 @@ export default function Menu() {
               <Link to="#" className="nav-link">
                 <i className="nav-icon fas fa-tachometer-alt" />
                 <p>
-                  Carteira 
+                  Carteira
                   <i className="right fas fa-angle-left" />
                 </p>
               </Link>
