@@ -13,11 +13,13 @@ import history from './services/history';
 export default function App() {
   return (
     <Router history={history}>
-      <Header />
-      <GlobalStyle />
-      <Menu />
-      <Routes />
-      <Footer />
+      <div className="wrapper">
+        <Header />
+        <GlobalStyle />
+        <Menu />
+        <Routes />
+        <Footer />
+      </div>
     </Router>
   );
 }
