@@ -3,7 +3,7 @@ import BarChart from '../Charts/BarChart';
 import Inline from '../Charts/Inline';
 import TabelaMip from '../Tables/mip';
 
-import api from '../../api';
+import api from '../../services/api';
 import dateFormatter from '../../utils/dateFormat';
 
 import { NotContent } from './styles';
@@ -11,6 +11,7 @@ import { NotContent } from './styles';
 import Box from '../Box';
 import GraficoAnalise from '../graficoAnalise';
 import Loading from '../Loading';
+import Upload from '../Upload';
 
 export default function Content() {
   const [mip, setMip] = useState({});
@@ -35,7 +36,7 @@ export default function Content() {
     <>
       <div>
         <div className="content-wrapper">
-          {loading && <Loading loading={loading} />}
+          {!loading && <Loading loading />}
           {!loading && mip ? (
             <>
               <div className="content-header">
@@ -71,7 +72,9 @@ export default function Content() {
               <TabelaMip mip={mip} />
             </>
           ) : (
-            <NotContent />
+            <NotContent>
+              <Upload />
+            </NotContent>
           )}
         </div>
       </div>
