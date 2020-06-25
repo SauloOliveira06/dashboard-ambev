@@ -11,7 +11,7 @@ import Loading from '../Loading';
 import Upload from '../Upload';
 
 export default function Content() {
-  const [mip, setMip] = useState({});
+  const [mip, setMip] = useState(null);
   const [loading, setLoading] = useState(false);
 
   async function getMip() {
@@ -22,7 +22,9 @@ export default function Content() {
 
     setLoading(false);
 
-    setMip(data);
+    if (data) {
+      setMip(data);
+    }
   }
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function Content() {
     <>
       <div className="content-wrapper">
         {loading && <Loading loading />}
-        {!loading && mip ? (
+        {!loading && mip !== null ? (
           <>
             <div className="content-header">
               <div className="container-fluid">
@@ -66,7 +68,7 @@ export default function Content() {
             </section>
           </>
         ) : (
-          <Upload />
+          <Upload callback={setMip} />
         )}
       </div>
     </>
