@@ -87,7 +87,9 @@ function Upload({ callback }) {
 
   function renderMessage(isDragActive, isDragReject) {
     if (!isDragActive) {
-      return <UploadMessage>Arraste o arquivo aqui...</UploadMessage>;
+      return (
+        <UploadMessage>Arraste o mip no formato .xlsx aqui...</UploadMessage>
+      );
     }
 
     if (isDragReject) {
@@ -100,8 +102,6 @@ function Upload({ callback }) {
   function removeFile() {
     setFile(null);
   }
-
-  console.log(uploadError);
 
   return (
     <Container>
@@ -143,7 +143,9 @@ function Upload({ callback }) {
                     <span>
                       {file.fileSize}
                       {file.progressUpload === 0 && (
-                        <button onClick={() => removeFile()}>Remover</button>
+                        <button type="button" onClick={() => removeFile()}>
+                          Remover
+                        </button>
                       )}
                     </span>
                   </div>
