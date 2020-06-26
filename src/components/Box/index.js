@@ -6,7 +6,7 @@ import moneyFormatter from '../../utils/moneyFormat';
 function Box({ mip }) {
   return (
     <>
-      {Object.is(mip, null) && (
+      {mip !== null && (
         <div className="row">
           <div className="col-12 col-sm-6 col-md-3">
             <div className="info-box">
@@ -16,7 +16,7 @@ function Box({ mip }) {
               <div className="info-box-content">
                 <span className="info-box-text">Custo Total</span>
                 <span className="info-box-number">
-                  {moneyFormatter(mip.totalEfeitoDaPerformace.total)}
+                  {moneyFormatter(mip.custoTotal.total)}
                 </span>
               </div>
             </div>
@@ -29,7 +29,7 @@ function Box({ mip }) {
               <div className="info-box-content">
                 <span className="info-box-text">Efeito Preço</span>
                 <span className="info-box-number">
-                  {moneyFormatter(mip.efeitoPreco.total)}
+                  {moneyFormatter(mip.efeitoPrecoTotal.total)}
                 </span>
               </div>
             </div>
@@ -43,7 +43,7 @@ function Box({ mip }) {
               <div className="info-box-content">
                 <span className="info-box-text">Efeito Performance</span>
                 <span className="info-box-number">
-                  {moneyFormatter(mip.efeitoPerformace.total)}
+                  {moneyFormatter(mip.efeitoPerformaceTotal.total)}
                 </span>
               </div>
             </div>
