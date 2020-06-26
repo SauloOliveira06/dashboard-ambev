@@ -44,9 +44,7 @@ export default function Content() {
                     <h1 className="m-0 text-dark">Dashboard MIP</h1>
                     <span>
                       Mês:{' '}
-                      {Object.is(mip, null)
-                        ? dateFormatter(mip.dataUploadedMip)
-                        : ''}
+                      {mip !== null ? dateFormatter(mip.dataUploadedMip) : ''}
                     </span>
                   </div>
                 </div>
