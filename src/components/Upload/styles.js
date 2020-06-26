@@ -56,7 +56,8 @@ export const UploadMessage = styled.p`
 `;
 
 export const FileContainer = styled.ul`
-  margin-top: 20px;
+  display: flex;
+  align-items: center;
 
   li {
     display: flex;

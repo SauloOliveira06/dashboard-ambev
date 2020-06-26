@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { MdCheckCircle, MdInsertDriveFile } from 'react-icons/md';
+import { MdInsertDriveFile } from 'react-icons/md';
 import fileSize from 'filesize';
 
 import { CircularProgressbar } from 'react-circular-progressbar';
 import Dropzone from 'react-dropzone';
+
+import Loading from '../Loading';
 
 import api from '../../services/api';
 
@@ -18,7 +20,12 @@ import {
 
 function Upload({ callback }) {
   const [file, setFile] = useState(null);
-  const [uploadError, setError] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [uploadError, setUploadError] = useState({
+    error: null,
+  });
+
+  const [showContent, setShowContent] = useState(true);
 
   function uploadFile(fileUpload) {
     const dataForm = new FormData();
@@ -32,15 +39,24 @@ function Upload({ callback }) {
             10
           );
 
+          if (progress >= 100) {
+            setShowContent(false);
+          }
+
           setFile({ ...fileUpload, progressUpload: progress });
         },
       })
       .then((response) => {
         const { data } = response;
-        callback(data);
+        if (data) {
+          callback(data);
+          setUploadSuccess(true);
+        }
       })
       .catch((error) => {
-        setError(true);
+        setUploadError({
+          error,
+        });
       });
   }
 
@@ -55,6 +71,7 @@ function Upload({ callback }) {
         uploaded: true,
       });
 
+      fileUpload.fileSize = fileSize(fileUpload.size);
       uploadFile(fileUpload);
     }
   }
@@ -77,60 +94,72 @@ function Upload({ callback }) {
 
   return (
     <Container>
-      <Content>
-        {file === null && (
-          <Dropzone
-            onDropAccepted={handleUpload}
-            // accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-          >
-            {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
-              <DropContainer
-                {...getRootProps()}
-                isDragActive={isDragActive}
-                isDragReject={isDragReject}
-              >
-                <input {...getInputProps()} />
-                {renderMessage(isDragActive, isDragReject)}
-              </DropContainer>
-            )}
-          </Dropzone>
-        )}
-        {file !== null && (
-          <FileContainer>
-            <li>
-              <FileInfo>
-                <MdInsertDriveFile size={36} />
+      {showContent ? (
+        <Content>
+          {file === null && (
+            <Dropzone
+              onDropAccepted={handleUpload}
+              // accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            >
+              {({
+                getRootProps,
+                getInputProps,
+                isDragActive,
+                isDragReject,
+              }) => (
+                <DropContainer
+                  {...getRootProps()}
+                  isDragActive={isDragActive}
+                  isDragReject={isDragReject}
+                >
+                  <input {...getInputProps()} />
+                  {renderMessage(isDragActive, isDragReject)}
+                </DropContainer>
+              )}
+            </Dropzone>
+          )}
+          {file !== null && file.progressUpload !== 100 && (
+            <FileContainer>
+              <li>
+                <FileInfo>
+                  <MdInsertDriveFile size={36} />
+                  <div>
+                    <strong>{file.path}</strong>
+                    <span>
+                      {file.fileSize}
+                      {file.progressUpload === 0 && (
+                        <button onClick={() => removeFile()}>Remover</button>
+                      )}
+                    </span>
+                  </div>
+                </FileInfo>
                 <div>
-                  <strong>{file.path}</strong>
-                  <span>
-                    {file.fileSize}{' '}
-                    <button onClick={() => removeFile()}>Remover</button>
-                  </span>
+                  {file !== null && !file.error && file.progressUpload !== 100 && (
+                    <CircularProgressbar
+                      styles={{
+                        root: {
+                          width: 40,
+                        },
+                        path: {
+                          stroke: '#78e5d5',
+                        },
+                        trailColor: '#ffff',
+                      }}
+                      strokeWidth={20}
+                      value={file.progressUpload}
+                    />
+                  )}
+                  {/* {file !== null &&
+                  file.progressUpload === 100 &&
+                  uploadSuccess && <MdCheckCircle size={24} color="#78e5d5" />} */}
                 </div>
-              </FileInfo>
-              <div>
-                {file !== null && !file.error && file.progressUpload !== 100 && (
-                  <CircularProgressbar
-                    styles={{
-                      root: {
-                        width: 40,
-                      },
-                      path: {
-                        stroke: '#78e5d5',
-                      },
-                    }}
-                    strokeWidth={20}
-                    value={file.progressUpload}
-                  />
-                )}
-                {file !== null && file.progressUpload === 100 && (
-                  <MdCheckCircle size={24} color="#78e5d5" />
-                )}
-              </div>
-            </li>
-          </FileContainer>
-        )}
-      </Content>
+              </li>
+            </FileContainer>
+          )}
+        </Content>
+      ) : (
+        <Loading loading={!uploadSuccess} />
+      )}
     </Container>
   );
 }
