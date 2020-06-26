@@ -92,3 +92,10 @@ export const FileInfo = styled.div`
     }
   }
 `;
+
+export const UploadError = styled.div`
+  margin-top: 7px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #b87078;
+`;

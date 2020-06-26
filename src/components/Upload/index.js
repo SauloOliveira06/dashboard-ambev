@@ -16,6 +16,7 @@ import {
   UploadMessage,
   FileContainer,
   FileInfo,
+  UploadError,
 } from './styles';
 
 function Upload({ callback }) {
@@ -30,6 +31,10 @@ function Upload({ callback }) {
   function uploadFile(fileUpload) {
     const dataForm = new FormData();
     dataForm.append('file', fileUpload, fileUpload.path);
+
+    setUploadError({
+      error: null,
+    });
 
     api
       .post('/mip/upload', dataForm, {
@@ -54,9 +59,13 @@ function Upload({ callback }) {
         }
       })
       .catch((error) => {
+        setShowContent(true);
+
         setUploadError({
-          error,
+          error: error.response.data.detail,
         });
+
+        setFile(null);
       });
   }
 
@@ -92,31 +101,37 @@ function Upload({ callback }) {
     setFile(null);
   }
 
+  console.log(uploadError);
+
   return (
     <Container>
       {showContent ? (
         <Content>
           {file === null && (
-            <Dropzone
-              onDropAccepted={handleUpload}
-              // accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            >
-              {({
-                getRootProps,
-                getInputProps,
-                isDragActive,
-                isDragReject,
-              }) => (
-                <DropContainer
-                  {...getRootProps()}
-                  isDragActive={isDragActive}
-                  isDragReject={isDragReject}
-                >
-                  <input {...getInputProps()} />
-                  {renderMessage(isDragActive, isDragReject)}
-                </DropContainer>
+            <>
+              <Dropzone onDropAccepted={handleUpload}>
+                {({
+                  getRootProps,
+                  getInputProps,
+                  isDragActive,
+                  isDragReject,
+                }) => (
+                  <DropContainer
+                    {...getRootProps()}
+                    isDragActive={isDragActive}
+                    isDragReject={isDragReject}
+                  >
+                    <input {...getInputProps()} />
+                    {renderMessage(isDragActive, isDragReject)}
+                  </DropContainer>
+                )}
+              </Dropzone>
+              {uploadError.error !== null && (
+                <UploadError>
+                  <span>{uploadError.error}</span>
+                </UploadError>
               )}
-            </Dropzone>
+            </>
           )}
           {file !== null && file.progressUpload !== 100 && (
             <FileContainer>
@@ -138,20 +153,19 @@ function Upload({ callback }) {
                     <CircularProgressbar
                       styles={{
                         root: {
-                          width: 40,
+                          width: 35,
                         },
                         path: {
-                          stroke: '#78e5d5',
+                          stroke: '#78e5d9',
                         },
-                        trailColor: '#ffff',
+                        trail: {
+                          stroke: '#fff',
+                        },
                       }}
                       strokeWidth={20}
                       value={file.progressUpload}
                     />
                   )}
-                  {/* {file !== null &&
-                  file.progressUpload === 100 &&
-                  uploadSuccess && <MdCheckCircle size={24} color="#78e5d5" />} */}
                 </div>
               </li>
             </FileContainer>
