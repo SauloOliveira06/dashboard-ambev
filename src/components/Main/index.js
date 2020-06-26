@@ -42,10 +42,10 @@ export default function Content() {
                 <div className="row mb-2">
                   <div className="col-sm-6">
                     <h1 className="m-0 text-dark">Dashboard MIP</h1>
-                    <span>
-                      Mês:{' '}
+                    <small>
+                      Mês:
                       {mip !== null ? dateFormatter(mip.dataUploadedMip) : ''}
-                    </span>
+                    </small>
                   </div>
                 </div>
               </div>
