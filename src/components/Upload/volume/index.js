@@ -5,9 +5,9 @@ import fileSize from 'filesize';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import Dropzone from 'react-dropzone';
 
-import Loading from '../Loading';
+import Loading from '../../Loading';
 
-import api from '../../services/api';
+import api from '../../../services/api';
 
 import {
   Container,
@@ -21,7 +21,7 @@ import {
 
 function Upload({ callback }) {
   const [file, setFile] = useState(null);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [uploadError, setUploadError] = useState({
     error: null,
   });
@@ -37,7 +37,7 @@ function Upload({ callback }) {
     });
 
     api
-      .post('/mip/upload', dataForm, {
+      .post('/volume-sap/upload', dataForm, {
         onUploadProgress: (event) => {
           const progress = parseInt(
             Math.round(event.loaded * 100) / event.total,
@@ -46,6 +46,7 @@ function Upload({ callback }) {
 
           if (progress >= 100) {
             setShowContent(false);
+            setLoading(true);
           }
 
           setFile({ ...fileUpload, progressUpload: progress });
@@ -55,7 +56,7 @@ function Upload({ callback }) {
         const { data } = response;
         if (data) {
           callback(data);
-          setUploadSuccess(true);
+          setLoading(false);
         }
       })
       .catch((error) => {
@@ -88,7 +89,7 @@ function Upload({ callback }) {
   function renderMessage(isDragActive, isDragReject) {
     if (!isDragActive) {
       return (
-        <UploadMessage>Arraste o mip no formato .xlsx aqui...</UploadMessage>
+        <UploadMessage>Arraste o arquivo Volume SAP aqui...</UploadMessage>
       );
     }
 
@@ -97,10 +98,6 @@ function Upload({ callback }) {
     }
 
     return <UploadMessage type="success">Solte o arquivo aqui</UploadMessage>;
-  }
-
-  function removeFile() {
-    setFile(null);
   }
 
   return (
@@ -140,14 +137,7 @@ function Upload({ callback }) {
                   <MdInsertDriveFile size={36} />
                   <div>
                     <strong>{file.path}</strong>
-                    <span>
-                      {file.fileSize}
-                      {file.progressUpload === 0 && (
-                        <button type="button" onClick={() => removeFile()}>
-                          Remover
-                        </button>
-                      )}
-                    </span>
+                    <span>{file.fileSize}</span>
                   </div>
                 </FileInfo>
                 <div>
@@ -158,10 +148,10 @@ function Upload({ callback }) {
                           width: 35,
                         },
                         path: {
-                          stroke: '#78e5d9',
+                          stroke: '#5BB157',
                         },
                         trail: {
-                          stroke: '#fff',
+                          stroke: '#C2BEC2',
                         },
                       }}
                       strokeWidth={20}
@@ -174,7 +164,7 @@ function Upload({ callback }) {
           )}
         </Content>
       ) : (
-        <Loading loading={!uploadSuccess} />
+        <Loading loading={loading} />
       )}
     </Container>
   );

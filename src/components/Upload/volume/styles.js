@@ -5,29 +5,27 @@ const dragActive = css`
 `;
 
 const dragReject = css`
-  border-color: #e57878;
+  border-color: '#D65238';
 `;
 
 export const Container = styled.div`
   display: flex;
-  height: 80vh;
   justify-content: center;
   align-items: center;
 `;
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 40vh;
-  padding: 20px;
-  background: #343a40;
+  background: #ffffff;
   border-radius: 4px;
-  color: white;
+  color: '#2B2A2B';
 `;
 
 export const DropContainer = styled.div.attrs({
   className: 'dropzone',
 })`
   display: flex;
+  padding: 20px;
   justify-content: center;
   align-items: center;
 
@@ -42,9 +40,9 @@ export const DropContainer = styled.div.attrs({
 `;
 
 const messageColors = {
-  default: '#fff',
+  default: '#06040D',
   error: '#e57878',
-  success: '#78e5d5',
+  success: '#36D68E',
 };
 
 export const UploadMessage = styled.p`
@@ -72,6 +70,7 @@ export const FileInfo = styled.div`
   align-items: center;
 
   div {
+    color: '#040D08';
     display: flex;
     flex-direction: column;
 
