@@ -3,11 +3,15 @@ import ReactLoading from 'react-loading';
 
 import { Container } from './styles';
 
-function Loading() {
+function Loading({ show }) {
   return (
-    <Container>
-      <ReactLoading type="bars" color="#5B81A7" width={50} />
-    </Container>
+    <>
+      {show && (
+        <Container>
+          <ReactLoading type="bars" color="#5B81A7" width={50} />
+        </Container>
+      )}
+    </>
   );
 }
 
