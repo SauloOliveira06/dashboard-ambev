@@ -10,15 +10,10 @@ import GraficoAnalise from '../graficoAnalise';
 
 export default function Content() {
   const [mip, setMip] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   async function getMip() {
-    setLoading(true);
-
     const response = await api.get('/volume-sap/');
     const { data } = response;
-
-    setLoading(false);
 
     if (data) {
       setMip(data);

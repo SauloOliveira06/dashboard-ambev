@@ -63,8 +63,6 @@ function GraficoAnalise() {
     getProducts();
   }, []);
 
-  console.log(Object.keys(dataGraphics).length > 0);
-
   return (
     <div className="row">
       <div className="col-md-12">
